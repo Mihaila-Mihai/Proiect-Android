@@ -1,0 +1,36 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh\\values-zh.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Mihai\\.gradle\\caches\\transforms-2\\files-2.1\\1ebbbd8c10b4e5f5b6a97ddc4b6298b0\\jetified-android-image-cropper-2.8.0\\res\\values-zh\\values-zh.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,135,182,234,286,353,418,480,540",
+                        "endColumns": "79,46,51,51,66,64,61,59,64",
+                        "endOffsets": "130,177,229,281,348,413,475,535,600"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Mihai\\.gradle\\caches\\transforms-2\\files-2.1\\71528102c23687bd92c071c7b638e2ed\\jetified-ucrop-2.2.6\\res\\values-zh\\values-zh.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,109,163",
+                        "endColumns": "53,53,46",
+                        "endOffsets": "104,158,205"
+                    },
+                    "to": {
+                        "startLines": "11,12,13",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "605,659,713",
+                        "endColumns": "53,53,46",
+                        "endOffsets": "654,708,755"
+                    }
+                }
+            ]
+        }
+    ]
+}
