@@ -80,16 +80,16 @@ public class SignInActivity extends AppCompatActivity {
 
 
     private void setupFloatingLabelError() {
-        final TextInputLayout floatingUsernameLabel =  findViewById(R.id.signin_password_input_layout);
-        Objects.requireNonNull(floatingUsernameLabel.getEditText()).addTextChangedListener(new TextWatcher() {
+        final TextInputLayout floatingPasswordLabel =  findViewById(R.id.signin_password_input_layout);
+        Objects.requireNonNull(floatingPasswordLabel.getEditText()).addTextChangedListener(new TextWatcher() {
             // ...
             @Override
             public void onTextChanged(CharSequence text, int start, int count, int after) {
                 if (text.length() > 0 && text.length() <= 7) {
-                    floatingUsernameLabel.setError(getString(R.string.password_length));
-                    floatingUsernameLabel.setErrorEnabled(true);
+                    floatingPasswordLabel.setError(getString(R.string.password_length));
+                    floatingPasswordLabel.setErrorEnabled(true);
                 } else {
-                    floatingUsernameLabel.setErrorEnabled(false);
+                    floatingPasswordLabel.setErrorEnabled(false);
                 }
             }
             @Override
