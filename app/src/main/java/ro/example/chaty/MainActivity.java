@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     CircleImageView profileImage;
     TextView username;
     FirebaseAuth mAuth;
-    Button signOut;
     DatabaseReference databaseReference;
 
 
@@ -63,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 //        signOut = findViewById(R.id.sign_out_btn);
 
         FirebaseUser user = mAuth.getCurrentUser();
+        assert user != null;
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
 
 
@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user1 = snapshot.getValue(User.class);
+                assert user1 != null;
                 username.setText(user1.getUsername());
                 if(user1.getImageURL().equals("default")) {
                     profileImage.setImageResource(R.mipmap.ic_launcher);
@@ -161,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
             return titles.get(position);
         }
     }
+
+    
 
 
 }

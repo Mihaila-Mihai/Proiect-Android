@@ -27,6 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.net.URL;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import ro.example.chaty.R;
 import ro.example.chaty.model.User;
@@ -76,8 +78,7 @@ public class ProfileFragment extends Fragment {
         profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CropImage.startPickImageActivity(getActivity());
-
+                CropImage.startPickImageActivity(getContext(),ProfileFragment.this);
             }
         });
 
@@ -88,6 +89,7 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE
             && resultCode == Activity.RESULT_OK) {
             Uri imageuri = CropImage.getPickImageResultUri(getContext(), data);
@@ -102,18 +104,23 @@ public class ProfileFragment extends Fragment {
         if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if(resultCode == Activity.RESULT_OK) {
-//                profile_image.setImageURI(result.getUri());
-                Glide.with(getContext()).load(result.getUri()).into(profile_image);
+                updateURI(result.getUri());
                 Toast.makeText(getContext(), "Image successfully updated!", Toast.LENGTH_SHORT).show();
             }
         }
 
     }
 
+    private void updateURI(Uri uri) {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid()).child("imageURL");
+
+        databaseReference.setValue(uri.toString());
+    }
 
 
     private void startCrop(Uri imageuri) {
-        CropImage.activity()
+        CropImage.activity(imageuri)
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .setMultiTouchEnabled(true)
                 .start(getContext(), this);

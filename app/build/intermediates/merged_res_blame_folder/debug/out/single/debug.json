@@ -1,0 +1,126 @@
+[
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\drawable_backgorund_left.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\drawable\\backgorund_left.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_paper_plane.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\drawable\\ic_paper_plane.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\drawable_background_right.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\drawable\\background_right.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_users.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\layout\\fragment_users.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_sign_in.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\layout\\activity_sign_in.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_chats.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\layout\\fragment_chats.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\layout_user_item.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\layout\\user_item.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_profile.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\layout\\fragment_profile.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_welcome.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\layout\\activity_welcome.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\layout_chat_item_left.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\layout\\chat_item_left.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\layout_chat_item_right.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\layout\\chat_item_right.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\menu\\menu.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_message.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\layout\\activity_message.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_sign_up.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\layout\\activity_sign_up.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rounded_corners.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\drawable\\rounded_corners.xml"
+    },
+    {
+        "merged": "D:\\AplicatiiAndroid\\Chaty\\app\\build\\intermediates\\res\\merged\\debug\\layout_topbar_layout.xml.flat",
+        "source": "D:\\AplicatiiAndroid\\Chaty\\app\\src\\main\\res\\layout\\topbar_layout.xml"
+    }
+]
