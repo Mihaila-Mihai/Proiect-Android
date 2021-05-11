@@ -96,6 +96,7 @@ public class SignUpActivity extends AppCompatActivity {
                             map.put("id", userId);
                             map.put("username", username);
                             map.put("imageURL", "default");
+                            map.put("status", "offline");
 
                             databaseReference.setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

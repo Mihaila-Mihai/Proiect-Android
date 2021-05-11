@@ -38,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import ro.example.chaty.fragments.ChatsFragment;
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
                 assert user1 != null;
                 username.setText(user1.getUsername());
                 if(user1.getImageURL().equals("default")) {
-                    profileImage.setImageResource(R.mipmap.ic_launcher);
+                    profileImage.setImageResource(R.mipmap.user);
                 } else {
                     Glide.with(MainActivity.this).load(user1.getImageURL()).into(profileImage);
                 }
@@ -122,8 +123,8 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        unregisterReceiver(receiver);
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+        status("offline");
     }
 
 
@@ -132,26 +133,28 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
         super.onStart();
         initNetworkManager();
         registerReceiver(receiver, filter);
+        status("online");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-//        unregisterReceiver(receiver);
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+        status("offline");
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
+        status("online");
         registerReceiver(receiver, filter);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//
+        status("offline");
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
     }
 
@@ -167,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
         } else {
             wasOffline = true;
             connectivityTextView.setVisibility(View.VISIBLE);
+            status("offline");
         }
     }
 
@@ -191,9 +195,9 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
         switch (item.getItemId()) {
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
-                startActivity(intent);
-                finish();
+                //status("offline");
+                startActivity(new Intent(MainActivity.this, WelcomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                //finish();
                 return true;
         }
         return false;
@@ -237,7 +241,14 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
         }
     }
 
-    
+    private void status(String status){
+        FirebaseUser user = mAuth.getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("status", status);
+
+        databaseReference.updateChildren(hashMap);
+    }
 
 
 }

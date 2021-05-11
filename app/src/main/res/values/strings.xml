@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Chaty</string>
-    <string name="login">Sign in</string>
+    <string name="login">SIGN IN</string>
     <string name="register">Sign up</string>
-    <string name="welcome_to_chaty">Welcome to Chaty!</string>
+    <string name="welcome_to_chaty">Chaty</string>
     <string name="username">Username</string>
     <string name="email">Email address</string>
     <string name="password">Password</string>

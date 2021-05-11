@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/topbar_signin"
         app:layout_constraintBottom_toTopOf="@id/signin_input_constraint"
-        android:text="Sign In"
+        android:text="SIGN IN"
         android:textStyle="bold"
         android:textSize="30sp"
         android:gravity="center"
@@ -26,10 +26,11 @@
         android:id="@+id/signin_input_constraint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="40dp"
-        android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/rounded_corners"
+        android:backgroundTint="@color/white"
+        android:padding="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,15 +39,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/signin_email_input_layout"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/signin_password_input_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/signin_password_input_layout"
             app:layout_constraintTop_toBottomOf="parent">
 
             <EditText
@@ -62,13 +63,13 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/signin_password_input_layout"
             android:layout_width="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/signin_email_input_layout"
             app:passwordToggleEnabled="true">
 
@@ -78,8 +79,7 @@
                 android:layout_height="match_parent"
                 android:autofillHints="Password"
                 android:hint="@string/password"
-                android:inputType="textPassword"
-                />
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,12 +89,15 @@
         android:id="@+id/signin_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="@null"
         android:text="@string/login"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/signin_input_constraint"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signin_input_constraint"
+        app:rippleColor="#FAF9F9"
+        app:strokeColor="#FFFEFE" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,10 +23,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private Context context;
     private List<User> userList;
+    private boolean ischat;
 
-    public UserAdapter(Context context, List<User> userList) {
+    public UserAdapter(Context context, List<User> userList,boolean ischat) {
         this.context = context;
         this.userList = userList;
+        this.ischat = ischat;
+
     }
 
     @NonNull
@@ -41,9 +44,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         User user = userList.get(position);
         holder.username.setText(user.getUsername());
         if(user.getImageURL().equals("default")) {
-            holder.profile_image.setImageResource(R.mipmap.ic_launcher);
+            holder.profile_image.setImageResource(R.mipmap.user);
         } else {
             Glide.with(context).load(user.getImageURL()).into(holder.profile_image);
+        }
+
+        if(ischat){
+            if(user.getStatus().equals("online")){
+                holder.img_on.setVisibility(View.VISIBLE);
+                holder.img_off.setVisibility(View.GONE);
+            }else{
+                holder.img_on.setVisibility(View.GONE);
+                holder.img_off.setVisibility(View.VISIBLE);
+            }
+        }else {
+            holder.img_on.setVisibility(View.GONE);
+            holder.img_off.setVisibility(View.GONE);
         }
 
 
@@ -67,11 +83,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         public TextView username;
         public ImageView profile_image;
+        public  ImageView img_on;
+        public  ImageView img_off;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.username);
             profile_image = itemView.findViewById(R.id.profile_image);
+            img_on = itemView.findViewById(R.id.status_on);
+            img_off = itemView.findViewById(R.id.status_off);
+
         }
     }
 }
