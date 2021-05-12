@@ -1,0 +1,2 @@
+ro/example/chaty/ExampleUnitTest.java
+ ro.example.chaty.ExampleUnitTest

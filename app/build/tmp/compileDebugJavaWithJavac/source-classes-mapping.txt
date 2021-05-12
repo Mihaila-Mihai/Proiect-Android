@@ -1,0 +1,52 @@
+ro/example/chaty/fragments/ChatsFragment.java
+ ro.example.chaty.fragments.ChatsFragment
+ ro.example.chaty.fragments.ChatsFragment$1
+ ro.example.chaty.fragments.ChatsFragment$2
+ro/example/chaty/adapter/MessageAdapter.java
+ ro.example.chaty.adapter.MessageAdapter
+ ro.example.chaty.adapter.MessageAdapter$ViewHolder
+ro/example/chaty/fragments/ProfileFragment.java
+ ro.example.chaty.fragments.ProfileFragment
+ ro.example.chaty.fragments.ProfileFragment$1
+ ro.example.chaty.fragments.ProfileFragment$2
+ro/example/chaty/BuildConfig.java
+ ro.example.chaty.BuildConfig
+ro/example/chaty/model/User.java
+ ro.example.chaty.model.User
+ro/example/chaty/model/Chat.java
+ ro.example.chaty.model.Chat
+ro/example/chaty/adapter/UserAdapter.java
+ ro.example.chaty.adapter.UserAdapter
+ ro.example.chaty.adapter.UserAdapter$1
+ ro.example.chaty.adapter.UserAdapter$ViewHolder
+ro/example/chaty/fragments/UsersFragment.java
+ ro.example.chaty.fragments.UsersFragment
+ ro.example.chaty.fragments.UsersFragment$1
+ro/example/chaty/MessageActivity.java
+ ro.example.chaty.MessageActivity
+ ro.example.chaty.MessageActivity$1
+ ro.example.chaty.MessageActivity$2
+ ro.example.chaty.MessageActivity$3
+ ro.example.chaty.MessageActivity$4
+ro/example/chaty/MainActivity.java
+ ro.example.chaty.MainActivity
+ ro.example.chaty.MainActivity$1
+ ro.example.chaty.MainActivity$ViewPagerAdapter
+ro/example/chaty/SignUpActivity.java
+ ro.example.chaty.SignUpActivity
+ ro.example.chaty.SignUpActivity$1
+ ro.example.chaty.SignUpActivity$2
+ ro.example.chaty.SignUpActivity$2$1
+ ro.example.chaty.SignUpActivity$3
+ro/example/chaty/WelcomeActivity.java
+ ro.example.chaty.WelcomeActivity
+ ro.example.chaty.WelcomeActivity$1
+ ro.example.chaty.WelcomeActivity$2
+ ro.example.chaty.WelcomeActivity$3
+ ro.example.chaty.WelcomeActivity$4
+ ro.example.chaty.WelcomeActivity$5
+ro/example/chaty/SignInActivity.java
+ ro.example.chaty.SignInActivity
+ ro.example.chaty.SignInActivity$1
+ ro.example.chaty.SignInActivity$1$1
+ ro.example.chaty.SignInActivity$2
