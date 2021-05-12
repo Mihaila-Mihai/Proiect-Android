@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -70,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
         profileImage = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
         mAuth = FirebaseAuth.getInstance();
-//        signOut = findViewById(R.id.sign_out_btn);
 
         FirebaseUser user = mAuth.getCurrentUser();
         assert user != null;
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
                 if(user1.getImageURL().equals("default")) {
                     profileImage.setImageResource(R.mipmap.user);
                 } else {
-                    Glide.with(MainActivity.this).load(user1.getImageURL()).into(profileImage);
+                    Glide.with(getApplicationContext()).load(user1.getImageURL()).into(profileImage);
                 }
             }
 
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
     protected void onDestroy() {
         super.onDestroy();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
-        status("offline");
+
     }
 
 
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
     protected void onStop() {
         super.onStop();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
-        status("offline");
+
     }
 
 
@@ -170,10 +170,8 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
         } else {
             wasOffline = true;
             connectivityTextView.setVisibility(View.VISIBLE);
-            status("offline");
         }
     }
-
 
 
     private void initNetworkManager(){
@@ -194,8 +192,8 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
+                status("offline");
                 FirebaseAuth.getInstance().signOut();
-                //status("offline");
                 startActivity(new Intent(MainActivity.this, WelcomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 //finish();
                 return true;
@@ -243,11 +241,14 @@ public class MainActivity extends AppCompatActivity implements NetworkListener{
 
     private void status(String status){
         FirebaseUser user = mAuth.getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
-        HashMap<String,Object> hashMap = new HashMap<>();
-        hashMap.put("status", status);
+        if(user !=null){
+            databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+            HashMap<String,Object> hashMap = new HashMap<>();
+            hashMap.put("status", status);
 
-        databaseReference.updateChildren(hashMap);
+            databaseReference.updateChildren(hashMap);
+        }
+
     }
 
 
