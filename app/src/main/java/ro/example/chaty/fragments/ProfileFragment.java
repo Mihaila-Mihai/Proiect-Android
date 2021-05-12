@@ -17,6 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,9 +27,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URL;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -40,6 +50,8 @@ public class ProfileFragment extends Fragment {
     CircleImageView profile_image;
     TextView username;
     Uri uri;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
 
 
     @Override
@@ -62,9 +74,13 @@ public class ProfileFragment extends Fragment {
                 username.setText(user.getUsername());
 
                 if(user.getImageURL().equals("default")) {
-                    profile_image.setImageResource(R.mipmap.ic_launcher);
+                    profile_image.setImageResource(R.mipmap.user);
                 } else {
-                    Glide.with(getContext()).load(user.getImageURL()).into(profile_image);
+                    try {
+                        Glide.with(getContext()).load(user.getImageURL()).into(profile_image);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }
@@ -91,7 +107,7 @@ public class ProfileFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE
-            && resultCode == Activity.RESULT_OK) {
+                && resultCode == Activity.RESULT_OK) {
             Uri imageuri = CropImage.getPickImageResultUri(getContext(), data);
             if(CropImage.isReadExternalStoragePermissionsRequired(getContext(), imageuri)) {
                 uri = imageuri;
@@ -104,20 +120,51 @@ public class ProfileFragment extends Fragment {
         if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if(resultCode == Activity.RESULT_OK) {
-                updateURI(result.getUri());
+                try {
+                    updateURI(result.getUri());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 Toast.makeText(getContext(), "Image successfully updated!", Toast.LENGTH_SHORT).show();
             }
         }
 
     }
 
-    private void updateURI(Uri uri) {
+    private void updateURI(Uri uri) throws FileNotFoundException {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid()).child("imageURL");
+        StorageReference imagesRef = storageRef.child("images").child(user.getUid());
 
-        databaseReference.setValue(uri.toString());
+        InputStream stream = new FileInputStream(new File(uri.getPath()));
+
+        UploadTask uploadTask = imagesRef.putStream(stream);
+
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if(!task.isSuccessful()) {
+                    throw task.getException();
+
+                }
+                return imagesRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if(task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid()).child("imageURL");
+
+                    databaseReference.setValue(downloadUri.toString());
+                } else {
+
+                }
+            }
+        });
+
+
     }
-
 
     private void startCrop(Uri imageuri) {
         CropImage.activity(imageuri)

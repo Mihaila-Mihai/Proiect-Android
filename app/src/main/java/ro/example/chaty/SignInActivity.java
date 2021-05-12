@@ -1,20 +1,27 @@
 package ro.example.chaty;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
@@ -26,8 +33,9 @@ public class SignInActivity extends AppCompatActivity {
 
     EditText email, password;
     Button signIn;
-
+    TextView recoverPass;
     FirebaseAuth auth;
+    ProgressDialog progressdialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,7 @@ public class SignInActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         signIn = findViewById(R.id.signin_btn);
+        recoverPass = findViewById(R.id.recoverpass);
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +83,14 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
+        recoverPass.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                showRecoverPassDialog();
+            }
+        });
+
+        progressdialog = new ProgressDialog(this);
 
     }
 
@@ -103,5 +120,72 @@ public class SignInActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void showRecoverPassDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Recover password");
+
+        LinearLayout linearLayout = new LinearLayout(this);
+        EditText emailinput = new EditText(this);
+        emailinput.setHint("Email");
+        emailinput.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        emailinput.setMinEms(16);
+
+        linearLayout.addView(emailinput);
+        linearLayout.setPadding(10,10,10,10);
+        builder.setView(linearLayout);
+
+        builder.setPositiveButton("Recover", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                String email = emailinput.getText().toString().trim();
+                beginRecovery(email);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        builder.create().show();
+    }
+
+    private void beginRecovery(String email){
+        progressdialog.setMessage("Sending email ...");
+        progressdialog.show();
+        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                progressdialog.dismiss();
+                if(task.isSuccessful()){
+                    Toast.makeText(SignInActivity.this,"Email sent", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(SignInActivity.this,"Failed..", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressdialog.dismiss();
+                Toast.makeText(SignInActivity.this,""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

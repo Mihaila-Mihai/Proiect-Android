@@ -7,10 +7,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +23,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabItem;
@@ -32,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import ro.example.chaty.fragments.ChatsFragment;
@@ -39,16 +46,21 @@ import ro.example.chaty.fragments.ProfileFragment;
 import ro.example.chaty.fragments.UsersFragment;
 import ro.example.chaty.model.User;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NetworkListener{
 
     CircleImageView profileImage;
     TextView username;
     FirebaseAuth mAuth;
     DatabaseReference databaseReference;
-
+    private WifiManager wifiManager;
+    private NetworkChangeReceiver receiver;
+    private IntentFilter filter;
+    private TextView connectivityTextView;
+    private boolean wasOffline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -59,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         profileImage = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
         mAuth = FirebaseAuth.getInstance();
-//        signOut = findViewById(R.id.sign_out_btn);
 
         FirebaseUser user = mAuth.getCurrentUser();
         assert user != null;
@@ -74,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
                 assert user1 != null;
                 username.setText(user1.getUsername());
                 if(user1.getImageURL().equals("default")) {
-                    profileImage.setImageResource(R.mipmap.ic_launcher);
+                    profileImage.setImageResource(R.mipmap.user);
                 } else {
-                    Glide.with(MainActivity.this).load(user1.getImageURL()).into(profileImage);
+                    Glide.with(getApplicationContext()).load(user1.getImageURL()).into(profileImage);
                 }
             }
 
@@ -102,8 +113,73 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        connectivityTextView = findViewById(R.id.connectivity_text_view);
+
+        initNetworkManager();
+        registerReceiver(receiver, filter);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+
+    }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initNetworkManager();
+        registerReceiver(receiver, filter);
+        status("online");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+        registerReceiver(receiver, filter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+    }
+
+    @Override
+    public void networkChange() {
+        if (receiver.isOnline(this)){
+            connectivityTextView.setVisibility(View.GONE);
+            if (wasOffline) {
+                Toast.makeText(this, "Back online", Toast.LENGTH_LONG).show();
+                Log.v("Br", "back online");
+                wasOffline = false;
+            }
+        } else {
+            wasOffline = true;
+            connectivityTextView.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    private void initNetworkManager(){
+        receiver = new NetworkChangeReceiver();
+        receiver.setupListener(this);
+        filter = new IntentFilter();
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        wasOffline = false;
     }
 
     @Override
@@ -116,10 +192,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
+                status("offline");
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
-                startActivity(intent);
-                finish();
+                startActivity(new Intent(MainActivity.this, WelcomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                //finish();
                 return true;
         }
         return false;
@@ -163,7 +239,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    
+    private void status(String status){
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user !=null){
+            databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+            HashMap<String,Object> hashMap = new HashMap<>();
+            hashMap.put("status", status);
+
+            databaseReference.updateChildren(hashMap);
+        }
+
+    }
 
 
 }

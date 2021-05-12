@@ -153,20 +153,7 @@ public class WelcomeActivity extends AppCompatActivity {
                     }
                 });
 
-//        Objects.requireNonNull(mAuth.getCurrentUser()).linkWithCredential(credential)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            Log.d("WelcomeActivity", "linkWithCredential:success");
-//                            FirebaseUser user = Objects.requireNonNull(task.getResult()).getUser();
-//                        } else {
-//                            Log.w("WelcomeActivity", "linkWithCredential:failure", task.getException());
-//                            Toast.makeText(WelcomeActivity.this, "Authentication failed.",
-//                                    Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
+
     }
 
     private void addToDatabase() {

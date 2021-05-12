@@ -24,7 +24,7 @@
                 android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="60dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@mipmap/user"/>
 
             <TextView
                 android:id="@+id/username"
@@ -34,8 +34,8 @@
                 android:text="@string/username"
                 android:layout_below="@id/profile_image"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/teal_200"
-                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textStyle="italic"
                 android:textSize="20sp"/>
 
 
